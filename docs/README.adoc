@@ -4,7 +4,7 @@ image::https://eventuate.io/i/logo.gif[]
 
 This project is part of http://eventuate.io[Eventuate], which is a microservices collaboration platform.
 
-# Eventuate Tram Customers and Orders
+## Eventuate Tram Customers and Orders
 
 This application demonstrates two key patterns:
 
@@ -77,7 +77,7 @@ The flow for publishing a domain event using Eventuate Tram is as follows:
 
 The following diagram shows the architecture of the Customers and Orders application.
 
-image::./images/Eventuate_Tram_Customer_and_Order_Architecture.png[]
+// image::.Eventuate_Tram_Customer_and_Order_Architecture.png[]
 
 The application consists of three services: `Customer Service`, `Order Service`, and `Order History Service`
 

@@ -1,4 +1,4 @@
-# SAGA - Passo a Passo
+# SAGA - Customers and Orders
 
 Este guia demonstra o fluxo de uma SAGA no exemplo "Customers and Orders" (Clientes e Pedidos) utilizando o padrão SAGA do Eventuate Tram.
 
@@ -6,7 +6,7 @@ Este guia demonstra o fluxo de uma SAGA no exemplo "Customers and Orders" (Clien
 
 ## Passo 1: Ponto de Partida
 
-**Arquivo:** [OrderService.java:28](order-service/order-service-domain/src/main/java/io/eventuate/examples/tram/ordersandcustomers/orders/domain/OrderService.java#L28)
+**Arquivo:** [OrderService.java:28](../order-service/order-service-domain/src/main/java/io/eventuate/examples/tram/ordersandcustomers/orders/domain/OrderService.java#L28)
 
 No `OrderService` (Serviço de Pedidos), o método `createOrder()` (criar pedido) inicia a SAGA publicando um evento.
 
@@ -32,7 +32,7 @@ public void createOrder(Order order) {
 
 ## Passo 2: Configuração do Handler (Manipulador) de Eventos de Pedido
 
-**Arquivo:** [OrderEventConsumer.java:23](customer-service/customer-service-event-handling/src/main/java/io/eventuate/examples/tram/ordersandcustomers/customers/eventhandlers/OrderEventConsumer.java#L23)
+**Arquivo:** [OrderEventConsumer.java:23](../customer-service/customer-service-event-handling/src/main/java/io/eventuate/examples/tram/ordersandcustomers/customers/eventhandlers/OrderEventConsumer.java#L23)
 
 No `Customer Service` (Serviço de Clientes), o handler (manipulador) do evento `OrderCreatedEvent` é configurado.
 
@@ -62,7 +62,7 @@ public class OrderEventConsumerConfiguration {
 
 ## Passo 3: Implementação do Handler de Eventos de Pedido
 
-**Arquivo:** [OrderEventConsumer.java:28](customer-service/customer-service-event-handling/src/main/java/io/eventuate/examples/tram/ordersandcustomers/customers/eventhandlers/OrderEventConsumer.java#L28)
+**Arquivo:** [OrderEventConsumer.java:28](../customer-service/customer-service-event-handling/src/main/java/io/eventuate/examples/tram/ordersandcustomers/customers/eventhandlers/OrderEventConsumer.java#L28)
 
 Aqui está a implementação do handler do evento `OrderCreatedEvent` no `Customer Service`.
 
@@ -101,7 +101,7 @@ public class OrderEventConsumer {
 
 ## Passo 4: Evento de Crédito Reservado do Cliente
 
-**Arquivo:** [CustomerService.java:58](customer-service/customer-service-domain/src/main/java/io/eventuate/examples/tram/ordersandcustomers/customers/domain/CustomerService.java#L58)
+**Arquivo:** [CustomerService.java:58](../customer-service/customer-service-domain/src/main/java/io/eventuate/examples/tram/ordersandcustomers/customers/domain/CustomerService.java#L58)
 
 No caminho feliz (happy path - quando tudo funciona corretamente), o `Customer Service` publica um evento `CustomerCreditReservedEvent` (Evento de Crédito do Cliente Reservado).
 
@@ -147,7 +147,7 @@ public void reserveCredit(String customerId, BigDecimal amount) {
 
 ## Passo 5: Configuração do Handler de Eventos de Cliente
 
-**Arquivo:** [CustomerEventConsumer.java:20](order-service/order-service-event-handling/src/main/java/io/eventuate/examples/tram/ordersandcustomers/orders/eventhandlers/CustomerEventConsumer.java#L20)
+**Arquivo:** [CustomerEventConsumer.java:20](../order-service/order-service-event-handling/src/main/java/io/eventuate/examples/tram/ordersandcustomers/orders/eventhandlers/CustomerEventConsumer.java#L20)
 
 No `Order Service`, o handler do evento `CustomerCreditReservedEvent` é configurado.
 
@@ -177,7 +177,7 @@ public class CustomerEventConsumerConfiguration {
 
 ## Passo 6: Implementação do Handler de Eventos de Cliente
 
-**Arquivo:** [CustomerEventConsumer.java:26](order-service/order-service-event-handling/src/main/java/io/eventuate/examples/tram/ordersandcustomers/orders/eventhandlers/CustomerEventConsumer.java#L26)
+**Arquivo:** [CustomerEventConsumer.java:26](../order-service/order-service-event-handling/src/main/java/io/eventuate/examples/tram/ordersandcustomers/orders/eventhandlers/CustomerEventConsumer.java#L26)
 
 Aqui está a implementação do handler do evento `CustomerCreditReservedEvent` no `Order Service`, que chama o `OrderService` para aprovar o pedido.
 
